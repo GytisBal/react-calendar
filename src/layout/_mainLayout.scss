@@ -1,0 +1,39 @@
+.mainLayout {
+  height: auto;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 5rem;
+  background-color: white;
+  vertical-align: middle;
+  border-radius: 15px 15px 0px 0px;
+  -webkit-box-shadow: 1px 3px 21px -5px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 3px 21px -5px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px 3px 21px -5px rgba(0, 0, 0, 0.75);
+  overflow: hidden;
+}
+
+.calendar-wrapper {
+  float: left;
+  height: 100%;
+  width: 80%;
+  border-right: 1px solid $light-grey;
+}
+
+.chatbox-wrapper {
+  float: right;
+  width: 20%;
+  height: 100%;
+}
+
+.calendar-container {
+  background-color: $color-secondary;
+  width: 100%;
+  height: 100%;
+}
+// Responsive design
+
+@include respond(tab-land) {
+  .mainLayout {
+    width: 100%;
+  }
+}

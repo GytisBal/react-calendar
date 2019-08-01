@@ -1,0 +1,135 @@
+.navigation-wrapper {
+  position: relative;
+  height: 9rem;
+  width: 100%;
+  border-bottom: 1px solid $light-grey;
+
+  .logo {
+    float: left;
+    position: relative;
+    height: 100%;
+    width: 9rem;
+    border-right: 1px solid $light-grey;
+
+    .image {
+      position: absolute;
+      height: 57%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  .search-container {
+    position: absolute;
+    left: 10%;
+    height: 100%;
+    .form-inline {
+      height: 100%;
+      i {
+        color: $color-primary;
+        font-size: 3rem;
+      }
+      input {
+        font-size: 1.5rem;
+        border: none;
+      }
+      ::placeholder {
+        color: $color-primary;
+      }
+    }
+  }
+
+  .navigation-container {
+    height: 100%;
+    .nav {
+      height: 100%;
+      .nav-item {
+        width: 10rem;
+        position: relative;
+        height: 100%;
+      }
+      .nav-link {
+        position: absolute;
+        height: 75%;
+        top: 50%;
+        left: 50%;
+        color: $color-primary;
+        transform: translate(-50%, -30%);
+        transition: all ease 0.15s;
+
+        &:hover {
+          border-bottom: 2px solid red !important;
+        }
+      }
+    }
+  }
+
+  .icons {
+    width: auto;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    i {
+      font-size: 3rem;
+      padding-right: 2rem;
+      color: $color-primary;
+    }
+  }
+}
+
+// Responsive Design
+@include respond(tab-laptop) {
+  .navigation-wrapper {
+    .search-container {
+      .form-inline {
+        padding-left: 1rem;
+
+        i {
+          color: $color-primary;
+          font-size: 2rem;
+        }
+        input {
+          font-size: 1.5rem;
+        }
+      }
+    }
+    .icons {
+      i {
+        font-size: 2rem;
+        padding-right: 0.5rem;
+      }
+    }
+  }
+}
+
+@include respond(tab-land) {
+  .navigation-wrapper {
+    .search-container {
+      display: none;
+      .form-inline {
+        padding-left: 1rem;
+
+        i {
+          color: $light-grey;
+          font-size: 1.5rem;
+        }
+        input {
+          font-size: 0.5rem;
+        }
+      }
+    }
+
+    .icons-container {
+      .icons {
+        i {
+          font-size: 2rem;
+          padding-right: 0.5rem;
+        }
+      }
+    }
+    .navigation-container {
+      display: none;
+    }
+  }
+}

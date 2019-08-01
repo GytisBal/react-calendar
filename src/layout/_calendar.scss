@@ -1,0 +1,115 @@
+.calendar-box {
+  height: 100%;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+
+  .calendar-navigation-row {
+    position: relative;
+    height: 5rem;
+    width: 100%;
+    border: 1px solid $light-grey;
+    .calendar-navigation-row-icons-container {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      i {
+        font-size: 2.2rem;
+        padding-left: 0.5rem;
+        color: $color-primary;
+        cursor: pointer;
+      }
+    }
+    .calendar-nvaigation-row-year-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      .calendar-navigation-row-year-items {
+        i {
+          color: $color-primary;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  table {
+    thead {
+      th {
+        width: 15rem;
+        font-size: 1.5rem;
+        color: $color-primary;
+      }
+    }
+    tbody {
+      td {
+        height: 12rem;
+        font-size: 2.5rem;
+        cursor: pointer;
+        transition: all ease 0.25s;
+
+       &:hover{
+        color: black;
+        background-color: white;
+        -webkit-box-shadow: 0px 0px 67px 0px rgba(112,112,112,0.50);
+        -moz-box-shadow: 0px 0px 67px 0px rgba(112,112,112,0.50);
+        box-shadow: 0px 0px 67px 0px rgba(112,112,112,0.50);
+        }
+      }
+    }
+  }
+}
+
+.holiday {
+  border: 2px solid red !important;
+  color: red;
+  z-index: 100;
+
+  h2{
+    display: inline;
+    vertical-align: middle;
+    padding-left: 1rem;
+  }
+}
+
+.disabled{
+font-weight: bold;
+background-color: $light-grey;
+}
+
+.task{
+  display: inline-table;
+  .task-heading{
+    color: $color-primary;
+  }
+  .time{
+    text-indent: 2rem;
+    opacity: 0.3;
+  }
+}
+// Responsive design
+@include respond(tab-laptop) {
+  .calendar-box {
+    table {
+      tbody {
+        td {
+          height: 12rem;
+          font-size: inherit;
+        }
+      }
+    }
+  }
+
+  .task{
+
+    .task-heading{
+      font-size: 1.2rem;
+
+    }
+    .time{
+      font-size: 1.2rem;
+    }
+  }
+}
+
+

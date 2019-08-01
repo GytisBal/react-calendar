@@ -1,0 +1,124 @@
+.chatbox-header{
+    position: relative;
+    height: 9rem;
+    border-bottom: 1px solid $light-grey;
+
+    .chatbox-mainUser{
+        padding: 1.5rem 5rem 1.5rem 3rem;
+        
+        .chatbox-mainUser-image{
+            position: relative;
+            float: right;
+
+            img{
+                height: 5rem;
+                border-radius: 50%;
+            }
+        }
+
+        .chatbox-mainUser-text{
+            display: table;
+            padding-right: 1rem;
+            padding-top: 1rem;
+
+            .chatbox-mainUser-name{
+                float: right;
+                font-weight: bold;
+                font-size: 1.5rem;
+                margin: 0;
+            }
+            .status-heading{
+                float: right;
+                opacity: 0.5;
+                font-size: 1.5rem;
+            }
+        }
+    }
+}
+
+.chatbox-body{
+    height: 83rem;
+    width: 100%;
+    background: 
+    linear-gradient(180deg, 
+    rgba(234,234,244,1) 0%, 
+    rgba(248,249,251,1) 30%);
+    padding-left: 2rem;
+    padding-right: 2rem;
+    overflow: scroll;
+
+    .chatbox-search{
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        .chatbox-search-heading{
+
+        }
+        .form-inline{
+            height: 3rem;
+            background-color: white;
+            padding-left: 1rem;
+
+            i{
+                opacity: 0.5;
+            }
+
+            input{
+                font-size: 1.5rem;
+            }
+            .form-control{
+                border: none;
+            }
+        }
+    }
+    .chatbox-user{
+        margin-top: 1.5rem;
+        .chatbox-user-image{
+            position: relative;
+            float: left;
+
+            .status{
+                position: absolute;
+                bottom: 10%;
+                right: -15%;
+                height: 10px;
+                width: 10px;
+            }
+            img{
+                height: 4rem;
+                border-radius: 50%;
+            }
+        }
+
+        .chatbox-user-text{
+            display: table;
+            padding-left: 1rem;
+            .chatbox-user-name{
+                font-weight: bold;
+                font-size: 1.5rem;
+                margin: 0;
+            }
+            .chatbox-user-comment{
+                font-size: 1.5rem; 
+            }
+            .chatbox-user-time{
+                opacity: 0.5;
+            }   
+        }
+    }
+}
+
+
+//Responsive Design 
+
+@include respond(tab-laptop){
+    .chatbox-header{
+        position: relative;
+        height: 9rem;
+        border-bottom: 1px solid $light-grey;
+    
+        .chatbox-mainUser{
+            padding: 1.5rem 2rem 1.5rem 2rem;
+        }
+    }
+
+}
