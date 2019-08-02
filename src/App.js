@@ -1,8 +1,18 @@
 import React, { Component } from "react";
+import Calendar from "./Calendar"
 import "./main.scss";
 import logo from "./img/koralis.png";
 
 class App extends Component {
+  constructor(props){
+    super()
+    this.state={
+      addEvent: false
+    }
+  }
+handleClick=()=>{
+  this.setState({addEvent: true})
+}
   render() {
     return (
       <main className="mainLayout">
@@ -84,141 +94,10 @@ class App extends Component {
                 <button className="calendar-button">Events</button>
               </div>
               <div className="event-buttons-container">
-                <button className="event-button">+ Add event</button>
+                <button className="event-button" onClick={this.handleClick}>+ Add event</button>
               </div>
             </div>
-            <div className="calendar-box">
-              <div className="calendar-navigation-row">
-                <div className="calendar-navigation-row-icons-container">
-                  <i className="fas fa-table" />
-                  <i className="fas fa-bars" />
-                </div>
-                <div className="calendar-nvaigation-row-year-container">
-                  <i
-                    className="fas fa-chevron-left"
-                    style={{ paddingRight: "4rem" }}
-                  />
-                  <h2 style={{ display: "inline" }}>May 2018</h2>
-                  <i
-                    className="fas fa-chevron-right"
-                    style={{ paddingLeft: "4rem" }}
-                  />
-                </div>
-              </div>
-              <table className="table table-bordered">
-                <thead>
-                  <tr>
-                    <th scope="col">Sunday</th>
-                    <th scope="col">Monday</th>
-                    <th scope="col">Tuesday</th>
-                    <th scope="col">Wednesday</th>
-                    <th scope="col">Thursday</th>
-                    <th scope="col">Friday</th>
-                    <th scope="col">Saturday</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td scope="row">30</td>
-                    <td>31</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                  </tr>
-                  <tr>
-                    <td scope="row" className="holiday">
-                      6<h2>Mother's Day</h2>
-                    </td>
-                    <td className="disabled">7</td>
-                    <td>8</td>
-                    <td>
-                      9
-                      <div className="task">
-                        <h4 className="task-heading">
-                          <span className="status green" />
-                          Call with Sam
-                        </h4>
-                        <h4 className="time">
-                          <i className="far fa-clock" /> 3:15 pm
-                        </h4>
-                      </div>
-                    </td>
-                    <td>10</td>
-                    <td>11</td>
-                    <td>12</td>
-                  </tr>
-                  <tr>
-                    <td scope="row">13</td>
-                    <td>14</td>
-                    <td>
-                      15
-                      <div className="task">
-                        <h4 className="task-heading">
-                          <span className="status green" />
-                          Design review
-                        </h4>
-                        <h4 className="time">
-                          <i className="far fa-clock" /> 8:55 am
-                        </h4>
-                        <h4 className="task-heading">
-                          <span className="status green" />
-                          QA
-                        </h4>
-                        <h4 className="time">
-                          <i className="far fa-clock" /> 4:10 pm
-                        </h4>
-                      </div>
-                    </td>
-                    <td>16</td>
-                    <td>17</td>
-                    <td>18</td>
-                    <td>19</td>
-                  </tr>
-                  <tr>
-                    <td scope="row">21</td>
-                    <td>22</td>
-                    <td>23</td>
-                    <td>24</td>
-                    <td>25</td>
-                    <td>
-                      26
-                      <div className="task">
-                        <h4 className="task-heading">
-                          <span className="status green" />
-                          Call with Dave
-                        </h4>
-                        <h4 className="time">
-                          <i className="far fa-clock" /> 1:30 pm
-                        </h4>
-                      </div>
-                    </td>
-                    <td>27</td>
-                  </tr>
-                  <tr>
-                    <td scope="row">
-                      28
-                      <div className="task">
-                        <h4 className="task-heading">
-                          <span className="status green" />
-                          Meet with Dave
-                        </h4>
-                        <h4 className="time">
-                          <i className="far fa-clock" /> 5:00 pm
-                        </h4>
-                      </div>
-                    </td>
-                    <td>29</td>
-                    <td>30</td>
-                    <td>31</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            <Calendar addEvent={this.state.addEvent}/>
           </div>
         </div>
         <div className="chatbox-wrapper">

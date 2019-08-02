@@ -24,12 +24,12 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      .calendar-navigation-row-year-items {
         i {
+          display: inline-block;
           color: $color-primary;
           cursor: pointer;
         }
-      }
+      
     }
   }
 
@@ -60,6 +60,15 @@
   }
 }
 
+
+.highlight{
+  color: black;
+  background-color: white;
+  -webkit-box-shadow: 0px 0px 67px 0px rgba(112,112,112,0.50);
+  -moz-box-shadow: 0px 0px 67px 0px rgba(112,112,112,0.50);
+  box-shadow: 0px 0px 67px 0px rgba(112,112,112,0.50);
+}
+
 .holiday {
   border: 2px solid red !important;
   color: red;
@@ -73,8 +82,7 @@
 }
 
 .disabled{
-font-weight: bold;
-background-color: $light-grey;
+color: $light-grey;
 }
 
 .task{
