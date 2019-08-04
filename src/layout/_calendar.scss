@@ -43,6 +43,7 @@
     }
     tbody {
       td {
+        position: relative;
         height: 12rem;
         font-size: 2.5rem;
         cursor: pointer;
@@ -86,7 +87,13 @@ color: $light-grey;
 }
 
 .task{
-  display: inline-table;
+  display: block;
+  .fa-window-close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: $color-primary;
+  }
   .task-heading{
     color: $color-primary;
   }

@@ -35,7 +35,29 @@
         }
     }
 }
+.chatbox-search{
+    padding: 2rem;
+    background-color: $light-grey;
+    .chatbox-search-heading{
 
+    }
+    .form-inline{
+        height: 3rem;
+        background-color: white;
+        padding-left: 1rem;
+
+        i{
+            opacity: 0.5;
+        }
+
+        input{
+            font-size: 1.5rem;
+        }
+        .form-control{
+            border: none;
+        }
+    }
+}
 .chatbox-body{
     height: 83rem;
     width: 100%;
@@ -47,29 +69,7 @@
     padding-right: 2rem;
     overflow: scroll;
 
-    .chatbox-search{
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-        .chatbox-search-heading{
-
-        }
-        .form-inline{
-            height: 3rem;
-            background-color: white;
-            padding-left: 1rem;
-
-            i{
-                opacity: 0.5;
-            }
-
-            input{
-                font-size: 1.5rem;
-            }
-            .form-control{
-                border: none;
-            }
-        }
-    }
+    
     .chatbox-user{
         margin-top: 1.5rem;
         .chatbox-user-image{

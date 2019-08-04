@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Calendar from "./Calendar"
+import MobileNavbar from "./mobileNavbar"
 import "./main.scss";
 import logo from "./img/koralis.png";
 
@@ -7,13 +8,26 @@ class App extends Component {
   constructor(props){
     super()
     this.state={
-      addEvent: false
+      addEvent: false,
+      changeButton:false
     }
   }
 handleClick=()=>{
   this.setState({addEvent: true})
 }
+
+closeEvent=()=>{
+  this.setState({addEvent: false})
+}
+changeButton=(props)=>{
+  if(props == true){
+    this.setState({changeButton: true})
+  }else{
+    this.setState({changeButton: false})
+  }
+}
   render() {
+    const buttonEvent = this.state.changeButton ? "Change event" : "+ Add event"
     return (
       <main className="mainLayout">
         <div className="calendar-wrapper">
@@ -21,6 +35,7 @@ handleClick=()=>{
             <div className="logo">
               <img src={logo} alt="" className="image" />
             </div>
+            {/* <MobileNavbar/> */}
             <div className="search-container">
               <form className="form-inline">
                 <i className="fas fa-search" aria-hidden="true" />
@@ -94,10 +109,15 @@ handleClick=()=>{
                 <button className="calendar-button">Events</button>
               </div>
               <div className="event-buttons-container">
-                <button className="event-button" onClick={this.handleClick}>+ Add event</button>
+                <button 
+                className="event-button" 
+                onClick={this.handleClick}>{buttonEvent}</button>
               </div>
             </div>
-            <Calendar addEvent={this.state.addEvent}/>
+            <Calendar 
+            addEvent={this.state.addEvent} 
+            closeEvent={this.closeEvent}
+            changeButton={this.changeButton}/>
           </div>
         </div>
         <div className="chatbox-wrapper">
@@ -117,8 +137,7 @@ handleClick=()=>{
                 </h3>
               </div>
             </div>
-          </div>
-          <div className="chatbox-body">
+            </div>
             <div className="chatbox-search">
               <h2 className="chatbox-search-heading">Calendar activity</h2>
               <form className="form-inline">
@@ -131,6 +150,8 @@ handleClick=()=>{
                 />
               </form>
             </div>
+          <div className="chatbox-body">
+            
             <div className="chatbox-user">
               <div className="chatbox-user-image">
                 <img
