@@ -56,6 +56,9 @@
         -moz-box-shadow: 0px 0px 67px 0px rgba(112,112,112,0.50);
         box-shadow: 0px 0px 67px 0px rgba(112,112,112,0.50);
         }
+        &:hover .fa-window-close{
+          display: initial;
+        }
       }
     }
   }
@@ -88,7 +91,9 @@ color: $light-grey;
 
 .task{
   display: block;
+
   .fa-window-close{
+    display: none;
     position: absolute;
     top: 0;
     right: 0;

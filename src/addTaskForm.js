@@ -27,9 +27,17 @@ class addTaskForm extends Component{
         this.props.closeEvent()
     }
     render(){
+        const props = this.props.changeButton
+        let button = "Add";
+        let heading= "Add task"
+        if(props == true){
+            button = "change"
+            heading = "Change event"
+        }
+
         return(
             <div className={`form-container`}>
-            <h3 className="form-header"> Add event
+            <h3 className="form-header"> {heading}
             <i onClick={this.closeEvent} className="far fa-window-close"></i>
             </h3>
             <form onSubmit={this.handleSubmit}> 
@@ -50,7 +58,7 @@ class addTaskForm extends Component{
               pattern="[0-2]?\d:[0-5]\d"
               onChange={this.handleChange}
               required  />
-              <button>Add</button>
+              <button>{button}</button>
             </form>
           </div>)
     }
