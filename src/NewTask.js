@@ -2,16 +2,11 @@ import React, { Component } from 'react'
 import "./main.scss"
 
 export default class NewTask extends Component {
-    constructor(props){
-        super(props)
-        this.state={
-
-        }
-    }
     deleteEvent=()=>{
         const date = this.props.date
         this.props.deleteEvent(date)
     }
+
     render() {
         return (
             <div className="task">

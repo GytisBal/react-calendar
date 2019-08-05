@@ -14,16 +14,17 @@ class Calendar extends Component {
       selectedDate: new Date(),
       addEvent: this.props.addEvent,
       addTask: false,
-      eventId: [],
-      changeButton: false
+      changeButton: false,
+      allEvents: [],
     }
   }
 
-
+  //Initial values from Local Storage
   componentDidMount() {
-    const eventId = JSON.parse(localStorage.getItem('eventId'));
+    let allEvents = JSON.parse(localStorage.getItem('allEvents'));
+    if(allEvents == null) allEvents = [];
     this.setState({addTask: true})
-    this.setState({ eventId:[...eventId] });
+    this.setState({ allEvents:[...allEvents] });
   }
 
   nextMonth = () => {
@@ -45,20 +46,12 @@ class Calendar extends Component {
     if (!dateFns.isSameDay(day, this.state.selectedDate)) {
       this.props.closeEvent()
     }
+
     this.setState({
       selectedDate: day,
     })
 
-    function findObjectByDate(array, key, value) {
-      for (let i = 0; i < array.length; i++) {
-        if (array[i][key] === value) {
-          return array[i];
-        }
-      }
-      return null;
-    }
-
-    const findDate = findObjectByDate(this.state.eventId, 'date', date);
+    const findDate = this.findObjectByDate(this.state.allEvents, 'date', date);
 
 
     if (findDate !== null) {
@@ -70,106 +63,61 @@ class Calendar extends Component {
       }
   }
 
+  // exit form
   cancelEvent = () => {
     this.props.closeEvent()
   }
 
   deleteEvent=(date)=>{
-    const newArray = this.state.eventId.filter((x) => {
+    const newArray = this.state.allEvents.filter((x) => {
       return x.date !== date
     })
-
-
     this.setState({
-      eventId: [...newArray]
+      allEvents: [...newArray]
     })
+    localStorage.setItem("allEvents", JSON.stringify(newArray))
+  }
 
-    localStorage.setItem("eventId", JSON.stringify(newArray))
+  findObjectByDate=(array, key, value)=>{
+    for (let i = 0; i < array.length; i++) {
+      if (array[i][key] === value) {
+        return array[i];
+      }
+    }
+    return null;
   }
 
   addNewEvent = (eventName, eventTime, id, date) => {
+    //change button from +Add event to Change event
     this.props.changeButton(true)
+    // change buttons on addTaskForm from add event to change Event
     this.setState({changeButton: true})
 
-    let eventId = JSON.parse(localStorage.getItem("eventId"));
-    if(eventId == null) eventId = [];
-    if (this.state.eventId.length == 0 && eventId.length == 0) {
-      let myObj = {id: id,
-        eventName: eventName,
-        eventTime: eventTime,
-        date: date}
-        localStorage.setItem("myObj", JSON.stringify(myObj));
-        eventId.push(myObj)
-        localStorage.setItem("eventId", JSON.stringify(eventId))
-
-
-      this.setState({
-        addTask: true,
-        eventId: [...this.state.eventId,
-        {
-          id: id,
-          eventName: eventName,
-          eventTime: eventTime,
-          date: date
-        }]
-      })
-    } else {
-      function findObjectByDate(array, key, value) {
-        for (let i = 0; i < array.length; i++) {
-          if (array[i][key] === value) {
-            return array[i];
-          }
-        }
-        return null;
-      }
-
-      const findDate = findObjectByDate(this.state.eventId, 'date', date);
-  
-      if (findDate !== null) {
-        const newArray = this.state.eventId.filter((x) => {
-          return x.date !== date
-        })
-
-        let myObj = {id: id,
-          eventName: eventName,
-          eventTime: eventTime,
-          date: date}
-          localStorage.setItem("myObj", JSON.stringify(myObj));
-          newArray.push(myObj)
-          localStorage.setItem("eventId", JSON.stringify(newArray))
-
-        this.setState({
-          addTask: true,
-          eventId: [...newArray,
-          {
-            id: id,
-            eventName: eventName,
-            eventTime: eventTime,
-            date: date
-          }]
-        })
-
-      } else {
-        let myObj = {id: id,
-          eventName: eventName,
-          eventTime: eventTime,
-          date: date}
-          localStorage.setItem("myObj", JSON.stringify(myObj));
-          eventId.push(myObj)
-          localStorage.setItem("eventId", JSON.stringify(eventId))
-          
-        this.setState({
-          addTask: true,
-          eventId: [...this.state.eventId,
-          {
-            id: id,
-            eventName: eventName,
-            eventTime: eventTime,
-            date: date
-          }]
-        })
-      }
+    let allEvents = JSON.parse(localStorage.getItem("allEvents"));
+    const findDate = this.findObjectByDate(this.state.allEvents, 'date', date);
+   
+    let myObj = {
+      id,
+      eventName,
+      eventTime,
+      date
     }
+
+    if(allEvents == null){
+        allEvents = [];
+      }
+
+    if (findDate !== null) {
+      allEvents= allEvents.filter((x) => {
+        return x.date !== date
+      })
+    }
+    allEvents.push(myObj)
+    localStorage.setItem("allEvents", JSON.stringify(allEvents))
+
+    this.setState({
+      allEvents
+    })  
   }
 
   renderCells() {
@@ -192,6 +140,7 @@ class Calendar extends Component {
       for (let i = 0; i < 7; i++) {
         formattedDate = dateFns.format(day, dateFormat);
         const cloneDay = day;
+
         let addTaskForm;
         if (this.props.addEvent == true &&
           dateFns.isSameDay(day, selectedDate) == true) {
@@ -202,10 +151,10 @@ class Calendar extends Component {
             changeButton={this.state.changeButton}
           />
         }
-        let newTask;
 
+        let newTask;
         if (this.state.addTask == true) {
-          this.state.eventId.map((x) => {
+          this.state.allEvents.map((x) => {
             if (dateFns.isSameDay(day, x.id)) {
               return newTask = <NewTask
                 eventName={x.eventName}
@@ -214,18 +163,19 @@ class Calendar extends Component {
                 deleteEvent={this.deleteEvent}/>
             }
           })
-
         }
+
         days.push(
           <td
             className={`${
               !dateFns.isSameMonth(day, monthStart)
-                ? "disabled"
-                : dateFns.isSameDay(day, selectedDate) ? "highlight" : ""
+              ? "disabled"
+              : dateFns.isSameDay(day, selectedDate) ? "highlight" : ""
               }`}
+
             key={day}
-            onClick={() => this.onDateClick(dateFns.parse(cloneDay))}
-          >
+            onClick={() => this.onDateClick(dateFns.parse(cloneDay))}>
+
             {formattedDate}
             {addTaskForm}
             {newTask}
@@ -233,11 +183,13 @@ class Calendar extends Component {
         );
         day = dateFns.addDays(day, 1);
       }
+
       rows.push(
         <tr key={day}>
           {days}
         </tr>
       );
+
       days = [];
     }
     return <tbody className="body">{rows}</tbody>;
